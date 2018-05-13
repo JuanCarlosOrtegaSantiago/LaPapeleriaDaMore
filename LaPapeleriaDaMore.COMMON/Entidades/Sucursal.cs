@@ -8,6 +8,6 @@ namespace LaPapeleriaDaMore.COMMON.Entidades
     {
         public string Direccion { get; set; }
         public Empleado Encargado { get; set; }
-        public List<Empleado> empleados { get; set; }
+        public List<Empleado> Empleados { get; set; }
     }
 }
