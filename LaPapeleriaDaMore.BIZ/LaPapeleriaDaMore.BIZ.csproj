@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="LiteDB" Version="4.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\LaPapeleriaDaMore.COMMON\LaPapeleriaDaMore.COMMON.csproj" />
   </ItemGroup>
 

@@ -7,5 +7,6 @@ namespace LaPapeleriaDaMore.COMMON.Interfaces
 {
     public interface IManejadorDeProducto:IManejadorGenerico<Producto>
     {
+        Producto BuscarPorCodigo(string codigo);
     }
 }

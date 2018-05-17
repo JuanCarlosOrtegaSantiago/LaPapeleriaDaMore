@@ -14,11 +14,17 @@ namespace LaPapeleriaDaMore.BIZ
         {
             this.repositorio = repositorio;
         }
+
         public List<Producto> Listar => repositorio.Leer;
 
         public bool Agregar(Producto entidad)
         {
             return repositorio.Crear(entidad);
+        }
+
+        public Producto BuscarPorCodigo(string codigo)
+        {
+            return Listar.Where(e => e.Codigo == codigo).SingleOrDefault();
         }
 
         public Producto BuscarPorId(string id)

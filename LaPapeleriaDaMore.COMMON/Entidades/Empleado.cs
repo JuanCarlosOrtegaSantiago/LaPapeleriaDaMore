@@ -7,8 +7,7 @@ namespace LaPapeleriaDaMore.COMMON.Entidades
     public class Empleado:Persona
     {
         public string Cargo { get; set; }
-        public string Bonificaciones { get; set; }
         public float Sueldo { get; set; }
-        public Sucursal sucursal { get; set; }
+        public string Contrasena { get; set; }
     }
 }
