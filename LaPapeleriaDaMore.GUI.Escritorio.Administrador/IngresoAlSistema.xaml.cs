@@ -22,10 +22,12 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
     {
         int oportunidades = 3;
         Empleado empleado;
-        public IngresoAlSistema(Empleado empleado)
+        Sucursal sucursal;
+        public IngresoAlSistema(Empleado empleado, Sucursal sucursal)
         {
             InitializeComponent();
             this.empleado = empleado;
+            this.sucursal = sucursal;
             MessageBox.Show("Bienvenido "+empleado.Nombre,"Bienvenido",MessageBoxButton.OK,MessageBoxImage.Asterisk, MessageBoxResult.None, MessageBoxOptions.ServiceNotification);
 
             lblErrorContrasenaIncorrecta.Visibility = Visibility.Collapsed;
@@ -33,48 +35,56 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
             txtblkUsuario.Content = empleado.Nombre;
         }
 
-        private void btnRegresar_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow pagina = new MainWindow();
-            pagina.Show();
-            this.Close();
-        }
-
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
-            lblErrorContrasenaIncorrecta.Visibility = Visibility.Collapsed;
-            lblErrorFaltaContrasena.Visibility = Visibility.Collapsed;
+            ValidacionDeContrasena();
+        }
 
-            if (!string.IsNullOrWhiteSpace(pswrContrasena.Password))
+        private void pswrContrasena_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
             {
-                if (empleado.Contrasena == pswrContrasena.Password)
-                {
+                ValidacionDeContrasena();
+            }
+        }
+
+        private void ValidacionDeContrasena()
+        {
+            //lblErrorContrasenaIncorrecta.Visibility = Visibility.Collapsed;
+            //lblErrorFaltaContrasena.Visibility = Visibility.Collapsed;
+
+            //if (!string.IsNullOrWhiteSpace(pswrContrasena.Password))
+            //{
+            //    if (empleado.Contrasena == pswrContrasena.Password)
+            //    {
                     lblErrorContrasenaIncorrecta.Visibility = Visibility.Collapsed;
                     lblErrorFaltaContrasena.Visibility = Visibility.Collapsed;
-                    MessageBox.Show("La contraseña es correcta","correcto", MessageBoxButton.OK, MessageBoxImage.Asterisk, MessageBoxResult.None, MessageBoxOptions.ServiceNotification);
-                }
-                else
-                {
-                    oportunidades -= 1;
-                    if (oportunidades == 0)
-                    {
-                        MessageBox.Show("Has agotado tus intentos", "Intento fallodo", MessageBoxButton.OK, MessageBoxImage.Asterisk, MessageBoxResult.None, MessageBoxOptions.ServiceNotification);
-                        MainWindow pagina = new MainWindow();
-                        pagina.Show();
-                        this.Close();
-                    }
-                    else
-                    {
-                        lblErrorContrasenaIncorrecta.Visibility = Visibility.Visible;
-                        lblErrorContrasenaIncorrecta.Content = string.Format("Contraseña incorrecta.\nTe quedan {0} oportunidades",oportunidades);
-                    }
-                    
-                }
-            }
-            else
-            {
-                lblErrorFaltaContrasena.Visibility = Visibility.Visible;
-            }
+                    VentanaReguistros pagina = new VentanaReguistros(sucursal);
+                    pagina.Show();
+                    this.Close();
+        //        }
+        //        else
+        //        {
+        //            oportunidades -= 1;
+        //            if (oportunidades == 0)
+        //            {
+        //                MessageBox.Show("Has agotado tus intentos", "Intento fallodo", MessageBoxButton.OK, MessageBoxImage.Asterisk, MessageBoxResult.None, MessageBoxOptions.ServiceNotification);
+        //                MainWindow pagina = new MainWindow();
+        //                pagina.Show();
+        //                this.Close();
+        //            }
+        //            else
+        //            {
+        //                lblErrorContrasenaIncorrecta.Visibility = Visibility.Visible;
+        //                lblErrorContrasenaIncorrecta.Content = string.Format("Contraseña incorrecta.\nTe quedan {0} oportunidades", oportunidades);
+        //            }
+
+        //        }
+        //    }
+        //    else
+        //    {
+        //        lblErrorFaltaContrasena.Visibility = Visibility.Visible;
+        //    }
         }
     }
 }

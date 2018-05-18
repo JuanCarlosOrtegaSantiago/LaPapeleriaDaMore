@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LaPapeleriaDaMore.GUI.Escritorio.Administrador"
         mc:Ignorable="d"
-        Title="Inicio " HorizontalContentAlignment="Center" HorizontalAlignment="Center" Height="400" Width="450" WindowStartupLocation="CenterScreen">
+        Title="Inicio " HorizontalContentAlignment="Center" HorizontalAlignment="Center" Height="400" Width="450" WindowStartupLocation="CenterScreen" KeyUp="Window_KeyUp">
     <Window.Background>
         <ImageBrush ImageSource="Imagenes/fondo.png" Stretch="UniformToFill"/>
     </Window.Background>
@@ -28,7 +28,6 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="1" Grid.Column="1" x:Name="btnSecreto" MouseDoubleClick="btnAceptar_MouseDoubleClick" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.VerticalScrollBarVisibility="Disabled" IsHitTestVisible="True" IsTabStop="False" >.</Button>
         <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="5">
             <Image Source="Imagenes/ico.png" Margin="10,0" ></Image>
             <Label VerticalAlignment="Center" Margin="10,0" FontSize="15" FontWeight="UltraBlack" FontStyle="Italic">BIENVENIDO</Label>
@@ -49,7 +48,7 @@
             </WrapPanel>
         </WrapPanel>
         <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="5" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2">
-            <Button Width="80" x:Name="btnAceptar" Click="btnAceptar_Click" MouseDoubleClick="btnAceptar_MouseDoubleClick">
+            <Button Width="80" x:Name="btnAceptar" Click="btnAceptar_Click">
                     <WrapPanel>
                         <Label>Aceptar</Label>
                         <Image Source="Imagenes/accept.png" Height="25" Width="20"></Image>

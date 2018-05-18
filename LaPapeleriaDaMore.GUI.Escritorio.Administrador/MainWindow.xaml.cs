@@ -57,7 +57,7 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                 Sucursal sucursal = cmbxSucursal.SelectedItem as Sucursal;
                 if (sucursal.Encargado.Id == empleado.Id)
                 {
-                    IngresoAlSistema pagina = new IngresoAlSistema(empleado);
+                    IngresoAlSistema pagina = new IngresoAlSistema(empleado, sucursal);
                     this.Close();
                     pagina.Show();
                 }
@@ -74,11 +74,14 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
             
         }
 
-        private void btnAceptar_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void Window_KeyUp(object sender, KeyEventArgs e)
         {
-            Sucursales pagina = new Sucursales();
-            pagina.Show();
-            this.Close();
+            if (e.Key == Key.LeftCtrl)
+            {
+                Sucursales pagina = new Sucursales();
+                pagina.Show();
+                this.Close();
+            }
         }
     }
 }

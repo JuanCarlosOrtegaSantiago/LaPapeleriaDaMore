@@ -44,7 +44,7 @@
             <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5">
                 <Image Source="Imagenes/key.png" Height="25" Width="15"></Image>
                 <Label Height="25">Contraseña</Label>
-                <PasswordBox x:Name="pswrContrasena" HorizontalAlignment="Right" VerticalAlignment="Center" Width="130" Height="25"></PasswordBox>
+                <PasswordBox x:Name="pswrContrasena" HorizontalAlignment="Right" VerticalAlignment="Center" Width="130" Height="25" KeyUp="pswrContrasena_KeyUp"></PasswordBox>
             </WrapPanel>
             <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5">
                 <Label x:Name="lblErrorFaltaContrasena" HorizontalAlignment="Center"  FontSize="10" FontWeight="Black" Foreground="Red">No has ingresado tu contraseña</Label>

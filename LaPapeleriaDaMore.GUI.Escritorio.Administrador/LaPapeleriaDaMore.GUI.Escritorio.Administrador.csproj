@@ -60,6 +60,9 @@
     <Compile Include="Sucursales.xaml.cs">
       <DependentUpon>Sucursales.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VentanaReguistros.xaml.cs">
+      <DependentUpon>VentanaReguistros.xaml</DependentUpon>
+    </Compile>
     <Page Include="CambioDeContrasena.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -87,6 +90,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Sucursales.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaReguistros.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
