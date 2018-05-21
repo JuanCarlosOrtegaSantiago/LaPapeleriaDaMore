@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LaPapeleriaDaMore.GUI.Escritorio.Administrador"
         mc:Ignorable="d"
-        Title="VentanaReguistros" Height="500" Width="750">
+        Title="VentanaReguistros" Height="500" Width="750" KeyUp="regresar" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Background>
         <ImageBrush ImageSource="Imagenes/fondo.png"/>
     </Window.Background>
@@ -246,7 +246,122 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </Grid>
+        </TabItem>
+        <TabItem Header="Producto" x:Name="pestanaDeProducto">
+            <Grid x:Name="GridProducto">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+                <WrapPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Source="Imagenes/ico.png" Height="80" Width="100" Margin="20,10" ></Image>
+                    <WrapPanel Orientation="Vertical">
+                        <Label VerticalAlignment="Center" FontWeight="Heavy" FontSize="15">La Papeleria DaMore</Label>
+                        <Label x:Name="lblDeSucursalProducto" VerticalAlignment="Center" FontWeight="Heavy" FontSize="15"></Label>
+                    </WrapPanel>
+                </WrapPanel>
+                <WrapPanel Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Label VerticalAlignment="Center"  FontWeight="Heavy" FontSize="15">PRODUCTOS</Label>
+                </WrapPanel>
+                <WrapPanel x:Name="panelDeDatosProducto" Orientation="Vertical" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Label VerticalAlignment="Center">*Nombre:</Label>
+                        <TextBox x:Name="tbxNombreDeProducto" VerticalAlignment="Center" Width="150"></TextBox>
+                    </WrapPanel>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
+                        <Label VerticalAlignment="Center">*Codigo:</Label>
+                        <TextBox x:Name="tbxCodigoProducto" VerticalAlignment="Center" Width="150"></TextBox>
+                    </WrapPanel>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Label VerticalAlignment="Center">*Presio de venta:</Label>
+                        <TextBox x:Name="tbxPresioDeVentaDeProducto" VerticalAlignment="Center" Width="150"></TextBox>
+                    </WrapPanel>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Label VerticalAlignment="Center">*Cantidad:</Label>
+                        <TextBox x:Name="tbxCantidadDeProducto" VerticalAlignment="Center" Width="150"></TextBox>
+                    </WrapPanel>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Label VerticalAlignment="Center">*Nombre De Proveedor:</Label>
+                        <TextBox x:Name="tbxNombreDelProveedorDeProducto" VerticalAlignment="Center" Width="150"></TextBox>
+                    </WrapPanel>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
+                        <Label VerticalAlignment="Center" FontWeight="DemiBold" Foreground="Red">* Campos Obligatrios *</Label>
+                    </WrapPanel>
+                </WrapPanel>
+                <WrapPanel Orientation="Vertical" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <WrapPanel Orientation="Vertical" Margin="5,0">
+                        <WrapPanel>
+                            <Button x:Name="btnNuevoProducto" Margin="10,10" Width="80" Height="30" Click="btnNuevoProducto_Click">
+                                <WrapPanel>
+                                    <Label>Nuevo</Label>
+                                    <Image Source="Imagenes/nuevo.png" Width="15"></Image>
+                                </WrapPanel>
+                            </Button>
+                            <Button x:Name="btnGuardarProducto" Margin="10,10" Width="80" Height="30" Click="btnGuardarProducto_Click">
+                                <WrapPanel>
+                                    <Label>Guardar</Label>
+                                    <Image Source="Imagenes/guardar.png" Width="15"></Image>
+                                </WrapPanel>
+                            </Button>
+                            <Button x:Name="btnCancelarProducto" Margin="10,10" Width="81"  Height="30" Click="btnCancelarProducto_Click">
+                                <WrapPanel>
+                                    <Label>Cancelar</Label>
+                                    <Image Source="Imagenes/cancel.png" Width="15"></Image>
+                                </WrapPanel>
+                            </Button>
+                        </WrapPanel>
 
+                        <WrapPanel HorizontalAlignment="Center">
+
+                            <Button x:Name="btnEditarProducto" Margin="10,10" Width="80" Height="30" Click="btnEditarProducto_Click">
+                                <WrapPanel>
+                                    <Label>Editar</Label>
+                                    <Image Source="Imagenes/editar.png" Width="15"></Image>
+                                </WrapPanel>
+                            </Button>
+                            <Button x:Name="btnEliminarProducto" Margin="10,10" Width="80" Height="30" Click="btnEliminarProducto_Click">
+                                <WrapPanel>
+                                    <Label>Eliminar</Label>
+                                    <Image Source="Imagenes/delete.png" Width="15"></Image>
+                                </WrapPanel>
+                            </Button>
+                        </WrapPanel>
+                    </WrapPanel>
+                </WrapPanel>
+                <ListView x:Name="lstProducto" HorizontalContentAlignment="Center" Grid.Row="2" Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="2">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Width="250">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock FontSize="12" HorizontalAlignment="Center" Text="{Binding Nombre}" Grid.Column="0" Grid.Row="0"></TextBlock>
+                                <TextBlock FontSize="12" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="0" Text="{Binding Codigo}"></TextBlock>
+                                <Expander FontSize="12" Header="Mas" Grid.Column="0" Grid.Row="1">
+                                    <TextBlock FontSize="12" HorizontalAlignment="Center" Text="{Binding Cantidad}" Grid.Column="1" Grid.Row="1"></TextBlock>
+                                </Expander>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
         </TabItem>
     </TabControl>
 </Window>

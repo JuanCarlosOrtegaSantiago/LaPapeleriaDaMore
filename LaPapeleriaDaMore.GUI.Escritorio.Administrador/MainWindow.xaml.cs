@@ -40,7 +40,7 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
             cmbxSucursal.ItemsSource = manejadorDeSucursal.Listar;
 
             cmbxEncargado.ItemsSource = null;
-            cmbxEncargado.ItemsSource = manejadorDeEmpleado.Listar;
+            cmbxEncargado.ItemsSource = manejadorDeEmpleado.Listar.Where(e=>e.Cargo== "Gerente");
         }
 
         private void btnSalir_Click(object sender, RoutedEventArgs e)
@@ -78,7 +78,7 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
         {
             if (e.Key == Key.LeftCtrl)
             {
-                Sucursales pagina = new Sucursales();
+                IngresoASucursales pagina = new IngresoASucursales();
                 pagina.Show();
                 this.Close();
             }

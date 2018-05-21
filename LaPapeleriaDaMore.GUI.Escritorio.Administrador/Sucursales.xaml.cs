@@ -104,12 +104,15 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
             {
                 if (sucursal != null) 
                 {
+
                     tbxDireccion.Text = sucursal.Direccion;
-                    tbxNombreEncargado.Text = sucursal.Encargado.Nombre;
-                    tbxTelefonoEncargado.Text = sucursal.Encargado.Telefono;
                     tbxNombreSucursal.Text = sucursal.Nombre;
+
+                    tbxTelefonoEncargado.Text = sucursal.Encargado.Telefono;
+                    tbxNombreEncargado.Text = sucursal.Encargado.Nombre;
                     tbxEmailDeEncargado.Text = sucursal.Encargado.Email;
                     tbxContrasenaEncargado.Text = sucursal.Encargado.Contrasena;
+
                     BotonesHabilitados(true);
                     PanelDeDatos.IsEnabled = true;
                     accionDeSucursal = accion.editar;
@@ -176,9 +179,11 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                             Telefono = tbxTelefonoEncargado.Text,
                             Sueldo = 823,
                             Email = tbxEmailDeEncargado.Text,
-                            Contrasena=tbxContrasenaEncargado.Text
+                            Contrasena = tbxContrasenaEncargado.Text,
+                            
                         };
                         manejadorDeEmpleado.Agregar(empleado);
+
                         Sucursal sucursal = new Sucursal()
                         {
                             Direccion = tbxDireccion.Text,
@@ -188,6 +193,9 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                         };
                         if (manejadorDeSucursal.Agregar(sucursal))
                         {
+                            empleado.sucursal = sucursal;
+                            manejadorDeEmpleado.Modificar(empleado);
+
                             MessageBox.Show("Se agrego correctamente la sucursal ''" + sucursal.Nombre + "''", "Agregar", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.ServiceNotification);
                             ActualizarTablaSucursales();
                             PanelDeDatos.IsEnabled = false;

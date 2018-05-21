@@ -1,5 +1,4 @@
-﻿using LaPapeleriaDaMore.COMMON.Entidades;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,23 +15,18 @@ using System.Windows.Shapes;
 namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
 {
     /// <summary>
-    /// Lógica de interacción para IngresoAlSistema.xaml
+    /// Lógica de interacción para IngresoASucursales.xaml
     /// </summary>
-    public partial class IngresoAlSistema : Window
+    public partial class IngresoASucursales : Window
     {
-        int oportunidades = 3;
-        Empleado empleado;
-        Sucursal sucursal;
-        public IngresoAlSistema(Empleado empleado, Sucursal sucursal)
+        private int oportunidades=3;
+
+        public IngresoASucursales()
         {
             InitializeComponent();
-            this.empleado = empleado;
-            this.sucursal = sucursal;
-            MessageBox.Show("Bienvenido "+empleado.Nombre,"Bienvenido",MessageBoxButton.OK,MessageBoxImage.Asterisk, MessageBoxResult.None, MessageBoxOptions.ServiceNotification);
 
             lblErrorContrasenaIncorrecta.Visibility = Visibility.Collapsed;
-            lblErrorFaltaContrasena.Visibility = Visibility.Collapsed;
-            txtblkUsuario.Content = empleado.Nombre;
+            lblErrorFaltaDeDatos.Visibility = Visibility.Collapsed;
         }
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
@@ -40,26 +34,18 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
             ValidacionDeContrasena();
         }
 
-        private void pswrContrasena_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                ValidacionDeContrasena();
-            }
-        }
-
         private void ValidacionDeContrasena()
         {
             lblErrorContrasenaIncorrecta.Visibility = Visibility.Collapsed;
-            lblErrorFaltaContrasena.Visibility = Visibility.Collapsed;
+            lblErrorFaltaDeDatos.Visibility = Visibility.Collapsed;
 
-            if (!string.IsNullOrWhiteSpace(pswrContrasena.Password))
+            if (!string.IsNullOrWhiteSpace(pswrContrasena.Password) && !string.IsNullOrWhiteSpace(tbxUsuario.Text)) 
             {
-                if (empleado.Contrasena == pswrContrasena.Password)
+                if (pswrContrasena.Password== "1234" && tbxUsuario.Text=="Juankx")
                 {
                     lblErrorContrasenaIncorrecta.Visibility = Visibility.Collapsed;
-                    lblErrorFaltaContrasena.Visibility = Visibility.Collapsed;
-                    VentanaReguistros pagina = new VentanaReguistros(sucursal);
+                    lblErrorFaltaDeDatos.Visibility = Visibility.Collapsed;
+                    Sucursales pagina = new Sucursales();
                     pagina.Show();
                     this.Close();
                 }
@@ -76,14 +62,22 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                     else
                     {
                         lblErrorContrasenaIncorrecta.Visibility = Visibility.Visible;
-                        lblErrorContrasenaIncorrecta.Content = string.Format("Contraseña incorrecta.\nTe quedan {0} oportunidades", oportunidades);
+                        lblErrorContrasenaIncorrecta.Content = string.Format("Contraseña o usuario incorrecta.\nTe quedan {0} oportunidades", oportunidades);
                     }
 
                 }
             }
             else
             {
-                lblErrorFaltaContrasena.Visibility = Visibility.Visible;
+                lblErrorFaltaDeDatos.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void pswrContrasena_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                ValidacionDeContrasena();
             }
         }
     }

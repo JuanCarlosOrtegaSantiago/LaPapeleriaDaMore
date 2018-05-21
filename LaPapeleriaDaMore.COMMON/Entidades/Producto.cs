@@ -9,7 +9,8 @@ namespace LaPapeleriaDaMore.COMMON.Entidades
         public string Codigo { get; set; }
         public float PresioVenta { get; set; }
         public int Cantidad { get; set; }
-
+        public string NombreProveedor { get; set; }
+        public Sucursal sucursal { get; set; }
 
     }
 }

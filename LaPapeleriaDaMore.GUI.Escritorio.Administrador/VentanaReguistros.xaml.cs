@@ -29,11 +29,13 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
         }
         accion accionDeCliente;
         accion accionDeEmpleado;
+        accion accionDeProducto;
 
         Sucursal Sucursal;
 
         IMAnejadorDeCliente mAnejadorDeCliente;
         IManejadorDeEmpleado manejadorDeEmpleado;
+        IManejadorDeProducto manejadorDeProducto;
         public VentanaReguistros(Sucursal sucursal)
         {
 
@@ -42,21 +44,53 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
             this.Sucursal = sucursal;
             lblDeSucursalCliente.Content = string.Format("Sucursal {0}",sucursal.Nombre);
             lblDeSucursalEmpleado.Content = string.Format("Sucursal {0}", sucursal.Nombre);
+            lblDeSucursalProducto.Content = string.Format("Sucursal {0}", sucursal.Nombre);
+
             lblContrasenaDeEmpleado.Visibility = Visibility.Collapsed;
             tbxContrasenaDeEmpleado.Visibility = Visibility.Collapsed;
 
             mAnejadorDeCliente = new ManejadorDeCliente(new RepositorioDeCliente());
             manejadorDeEmpleado = new ManejadorDeEmpleado(new RepositorioDeEmpleado());
+            manejadorDeProducto = new ManejadorDeProducto(new RepositorioDeProducto());
 
+            ActualizarTeblaDeProducto();
             ActualizarTablaDeEmpleado();
             ActualizarTablaDeCliente();
 
             LimpiarCamposDeEmpleado(false);
             LimpiarCamposDeCliente(false);
+            LimpiarCamposDeProducto(false);
 
+            HabilitarBotonesParaProductos(false);
             HabilitarBotonesParaEmpleados(false);
             HabilitarBotonesParaClientes(false);
 
+        }
+
+        private void HabilitarBotonesParaProductos(bool v)
+        {
+            btnCancelarProducto.IsEnabled = v;
+            btnEditarProducto.IsEnabled = !v;
+            btnEliminarProducto.IsEnabled = !v;
+            btnGuardarProducto.IsEnabled = v;
+            btnNuevoProducto.IsEnabled = !v;
+        }
+
+        private void LimpiarCamposDeProducto(bool v)
+        {
+            tbxCantidadDeProducto.Clear();
+            tbxCodigoProducto.Clear();
+            tbxNombreDelProveedorDeProducto.Clear();
+            tbxNombreDeProducto.Clear();
+            tbxPresioDeVentaDeProducto.Clear();
+            panelDeDatosProducto.IsEnabled = v;
+            lstvEmpleados.IsEnabled = !v;
+        }
+
+        private void ActualizarTeblaDeProducto()
+        {
+            lstProducto.ItemsSource = null;
+            lstProducto.ItemsSource = manejadorDeProducto.Listar.Where(e => e.sucursal.Id == Sucursal.Id);
         }
 
         private void HabilitarBotonesParaEmpleados(bool v)
@@ -108,7 +142,7 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
         private void ActualizarTablaDeCliente()
         {
             lstvClientes.ItemsSource = null;
-            lstvClientes.ItemsSource = mAnejadorDeCliente.Listar;
+            lstvClientes.ItemsSource = mAnejadorDeCliente.Listar.Where(e => e.sucursal.Id == Sucursal.Id);
         }
 
         private void btnNuevoCliente_Click(object sender, RoutedEventArgs e)
@@ -220,7 +254,8 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                             Email = tbxEmailDeCliente.Text,
                             Nombre = tbxNombreDeCliente.Text,
                             RFC = tbxRFCDeCliente.Text,
-                            Telefono = tbxTelefonoCliente.Text
+                            Telefono = tbxTelefonoCliente.Text,
+                            sucursal = Sucursal 
                         };
                         if (mAnejadorDeCliente.Agregar(cliente))
                         {
@@ -394,7 +429,8 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                                 Email = tbxEmailDeEmpleado.Text,
                                 Nombre = tbxNombreDeEmpleado.Text,
                                 Sueldo = float.Parse(tbxSueldoDeEmpleado.Text),
-                                Telefono = tbxTelefonoEmpleado.Text
+                                Telefono = tbxTelefonoEmpleado.Text,
+                                sucursal = Sucursal
                             };
                             if (manejadorDeEmpleado.Agregar(empleado))
                             {
@@ -415,7 +451,7 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                         }
                     }
                     
-                    if (accionDeEmpleado == accion.editar && tbxCargoDeEmpleado.Text == "Gerente")
+                    else if (accionDeEmpleado == accion.editar && tbxCargoDeEmpleado.Text == "Gerente")
                     {
                         if (!string.IsNullOrWhiteSpace(tbxContrasenaDeEmpleado.Text) && !string.IsNullOrWhiteSpace(tbxEmailDeEmpleado.Text) && !string.IsNullOrWhiteSpace(tbxNombreDeEmpleado.Text) && !string.IsNullOrWhiteSpace(tbxSueldoDeEmpleado.Text) && !string.IsNullOrWhiteSpace(tbxTelefonoEmpleado.Text))
                         {
@@ -425,6 +461,7 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                             empleado.Nombre = tbxNombreDeEmpleado.Text;
                             empleado.Sueldo = float.Parse(tbxSueldoDeEmpleado.Text);
                             empleado.Telefono = tbxTelefonoEmpleado.Text;
+                            empleado.sucursal = Sucursal;
                             if (manejadorDeEmpleado.Modificar(empleado))
                             {
                                 MensajeDeOperacionCorrecta("gerente", "modifico", "modificado");
@@ -454,7 +491,7 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                             empleado.Nombre = tbxNombreDeEmpleado.Text;
                             empleado.Sueldo = float.Parse(tbxSueldoDeEmpleado.Text);
                             empleado.Telefono = tbxTelefonoEmpleado.Text;
-
+                            empleado.sucursal = Sucursal;
                             if (manejadorDeEmpleado.Modificar(empleado))
                             {
                                 MensajeDeOperacionCorrecta("empleado", "modifico", "modificado");
@@ -485,5 +522,150 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
             }
         }
 
+        private void btnNuevoProducto_Click(object sender, RoutedEventArgs e)
+        {
+            HabilitarBotonesParaProductos(true);
+            LimpiarCamposDeProducto(true);
+            accionDeProducto = accion.nuevo;
+        }
+
+        private void btnCancelarProducto_Click(object sender, RoutedEventArgs e)
+        {
+            HabilitarBotonesParaProductos(false);
+            LimpiarCamposDeProducto(false);
+        }
+
+        private void btnEditarProducto_Click(object sender, RoutedEventArgs e)
+        {
+            if (manejadorDeProducto.Listar.Count != 0)
+            {
+                Producto producto = lstProducto.SelectedItem as Producto;
+                if (producto != null)
+                {
+                    LimpiarCamposDeProducto(true);
+                    HabilitarBotonesParaProductos(true);
+                    accionDeProducto = accion.editar;
+
+                    tbxCantidadDeProducto.Text = producto.Cantidad.ToString();
+                    tbxCodigoProducto.Text = producto.Codigo;
+                    tbxNombreDelProveedorDeProducto.Text = producto.NombreProveedor;
+                    tbxNombreDeProducto.Text = producto.Nombre;
+                    tbxPresioDeVentaDeProducto.Text = producto.PresioVenta.ToString();
+                }
+                else
+                {
+                    MensajeNoSeleccionadoNada("producto", "editar", "Error en selección");
+                }
+            }
+            else
+            {
+                MensajeNoContienes("producto", "editar", "Falta de datos");
+            }
+        }
+
+        private void btnEliminarProducto_Click(object sender, RoutedEventArgs e)
+        {
+            if (manejadorDeProducto.Listar.Count != 0)
+            {
+                Producto producto = lstProducto.SelectedItem as Producto;
+                if (producto != null)
+                {
+                    if (MessageBox.Show("Realmente deseas eliminar el producto''" + producto.Nombre + "''", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.None, MessageBoxOptions.ServiceNotification) == MessageBoxResult.Yes)
+                    {
+                        if (manejadorDeProducto.Eliminar(producto.Id))
+                        {
+                            MensajeDeOperacionCorrecta("producto", "eliminado", "eliminado");
+                            ActualizarTeblaDeProducto();
+                        }
+                        else
+                        {
+                            MensajeDeOperacionIncorrecta("producto", "eliminar", "Error al eliminar");
+                        }
+                    }
+                }
+                else
+                {
+                    MensajeNoSeleccionadoNada("producto", "eliminar", "Error en selección");
+                }
+            }
+            else
+            {
+                MensajeNoContienes("producto", "eliminar", "Falta de datos");
+            }
+        }
+
+        private void btnGuardarProducto_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(tbxCantidadDeProducto.Text) && !string.IsNullOrWhiteSpace(tbxCodigoProducto.Text) && !string.IsNullOrWhiteSpace(tbxNombreDelProveedorDeProducto.Text) && !string.IsNullOrWhiteSpace(tbxNombreDeProducto.Text) && !string.IsNullOrWhiteSpace(tbxPresioDeVentaDeProducto.Text))
+                {
+                    if (accionDeProducto == accion.nuevo)
+                    {
+                        Producto producto = new Producto()
+                        {
+
+                            Cantidad = int.Parse(tbxCantidadDeProducto.Text),
+                            Nombre = tbxNombreDeProducto.Text,
+                            Codigo = tbxCodigoProducto.Text,
+                            NombreProveedor = tbxNombreDelProveedorDeProducto.Text,
+                            PresioVenta = float.Parse(tbxPresioDeVentaDeProducto.Text),
+                            sucursal = Sucursal
+                        };
+                        if (manejadorDeProducto.Agregar(producto))
+                        {
+                            MensajeDeOperacionCorrecta("producto", "agrego", "agregado");
+                            ActualizarTeblaDeProducto();
+                            HabilitarBotonesParaProductos(false);
+                            LimpiarCamposDeProducto(false);
+                        }
+                        else
+                        {
+                            MensajeDeOperacionIncorrecta("producto", "guardar", "Error al guardar producto");
+                        }
+                    }
+                    else
+                    {
+                        Producto producto = lstProducto.SelectedItem as Producto;
+                        producto.Cantidad = int.Parse(tbxCantidadDeProducto.Text);
+                        producto.Nombre = tbxNombreDeProducto.Text;
+                        producto.Codigo = tbxCodigoProducto.Text;
+                        producto.NombreProveedor = tbxNombreDelProveedorDeProducto.Text;
+                        producto.PresioVenta = float.Parse(tbxPresioDeVentaDeProducto.Text);
+                        producto.sucursal = Sucursal;
+                        if (manejadorDeProducto.Modificar(producto))
+                        {
+                            MensajeDeOperacionCorrecta("producto", "modifico", "modificado");
+                            ActualizarTeblaDeProducto();
+                            HabilitarBotonesParaProductos(false);
+                            LimpiarCamposDeProducto(false);
+                        }
+                        else
+                        {
+                            MensajeDeOperacionIncorrecta("producto", "modificar", "Error al modificar cliente");
+                        }
+                    }
+                }
+                else
+                {
+                    MensajeFaltaDeDatos();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MensajeDeError(ex);
+            }
+        }
+
+        private void regresar(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                MainWindow pagina = new MainWindow();
+                pagina.Show();
+                this.Close();
+            }
+        }
     }
 }
