@@ -10,7 +10,7 @@ namespace LaPapeleriaDaMore.DAL
 {
     public class RepositorioDeVenta : IRepositorio<Venta>
     {
-        private string DBName = "LaPapeleriaDaMore.DB";
+        private string DBName = @"C:\Bd\LaPapeleriaDaMore.DB";
         private string TableName = "Ventas";
         public List<Venta> Leer
         {

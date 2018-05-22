@@ -7,5 +7,7 @@ namespace LaPapeleriaDaMore.COMMON.Entidades
     public class Cliente:Persona
     {
         public string RFC { get; set; }
+        public Sucursal sucursal { get; set; }
+
     }
 }

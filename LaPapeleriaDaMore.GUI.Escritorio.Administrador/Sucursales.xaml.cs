@@ -39,7 +39,7 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
             manejadorDeSucursal = new ManejadorDeSucursal(new RepositorioDeSucursal());
             manejadorDeEmpleado = new ManejadorDeEmpleado(new RepositorioDeEmpleado());
 
-
+            
             PanelDeDatos.IsEnabled = false;
             BotonesHabilitados(false);
             ActualizarTablaSucursales();
@@ -180,7 +180,6 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                             Sueldo = 823,
                             Email = tbxEmailDeEncargado.Text,
                             Contrasena = tbxContrasenaEncargado.Text,
-                            
                         };
                         manejadorDeEmpleado.Agregar(empleado);
 
@@ -193,8 +192,15 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                         };
                         if (manejadorDeSucursal.Agregar(sucursal))
                         {
-                            empleado.sucursal = sucursal;
-                            manejadorDeEmpleado.Modificar(empleado);
+                            //ComboBox combo = new ComboBox();
+                            //combo.SelectedItem = empleado;
+                            //Empleado empleado1 = combo.SelectedItem as Empleado;
+                            //empleado1.sucursal = sucursal;
+
+                            //if (manejadorDeEmpleado.Modificar(empleado1))
+                            //{
+                            //    MessageBox.Show("se modifico ah la sucursal ah"+empleado.sucursal.Nombre);
+                            //}
 
                             MessageBox.Show("Se agrego correctamente la sucursal ''" + sucursal.Nombre + "''", "Agregar", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.ServiceNotification);
                             ActualizarTablaSucursales();

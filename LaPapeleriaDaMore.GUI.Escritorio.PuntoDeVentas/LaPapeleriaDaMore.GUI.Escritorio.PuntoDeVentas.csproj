@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AE87C742-C165-4AE8-8C6B-6A9482C8BCF1}</ProjectGuid>
+    <ProjectGuid>{2BA7B38D-08BB-47C8-9C77-95FB26B82610}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>LaPapeleriaDaMore.GUI.Escritorio.Administrador</RootNamespace>
-    <AssemblyName>LaPapeleriaDaMore.GUI.Escritorio.Administrador</AssemblyName>
+    <RootNamespace>LaPapeleriaDaMore.GUI.Escritorio.PuntoDeVentas</RootNamespace>
+    <AssemblyName>LaPapeleriaDaMore.GUI.Escritorio.PuntoDeVentas</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -57,20 +57,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="IngresoASucursales.xaml.cs">
-      <DependentUpon>IngresoASucursales.xaml</DependentUpon>
+    <Compile Include="IngresoAlSistema.xaml.cs">
+      <DependentUpon>IngresoAlSistema.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Sucursales.xaml.cs">
-      <DependentUpon>Sucursales.xaml</DependentUpon>
+    <Compile Include="PuntoDeVentas.xaml.cs">
+      <DependentUpon>PuntoDeVentas.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VentanaReguistros.xaml.cs">
-      <DependentUpon>VentanaReguistros.xaml</DependentUpon>
+    <Compile Include="Venta.xaml.cs">
+      <DependentUpon>Venta.xaml</DependentUpon>
     </Compile>
     <Page Include="IngresoAlSistema.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="IngresoASucursales.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -82,18 +78,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="IngresoAlSistema.xaml.cs">
-      <DependentUpon>IngresoAlSistema.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Sucursales.xaml">
+    <Page Include="PuntoDeVentas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="VentanaReguistros.xaml">
+    <Page Include="Venta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,6 +119,51 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Imagen\accept.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\cam.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\editar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\encargado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\fondo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\guardar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\ico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\key.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\nuevo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\regresar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\sucursal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\user.png" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\LaPapeleriaDaMore.BIZ\LaPapeleriaDaMore.BIZ.csproj">
       <Project>{e5cc8d1f-18ff-4906-84e6-75271c4a077e}</Project>
       <Name>LaPapeleriaDaMore.BIZ</Name>
@@ -138,43 +176,13 @@
       <Project>{fa7b30c5-2057-432a-9ad1-84a9a12081e9}</Project>
       <Name>LaPapeleriaDaMore.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LaPapeleriaDaMore.GUI.Escritorio.Administrador\LaPapeleriaDaMore.GUI.Escritorio.Administrador.csproj">
+      <Project>{ae87c742-c165-4ae8-8c6b-6a9482c8bcf1}</Project>
+      <Name>LaPapeleriaDaMore.GUI.Escritorio.Administrador</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Imagenes\fondo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Imagenes\ico.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Imagenes\user.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Imagenes\key.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Imagenes\accept.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Imagenes\cancel.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Imagenes\encargado.png" />
-    <Resource Include="Imagenes\sucursal.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Imagenes\add.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Imagenes\delete.png" />
-    <Resource Include="Imagenes\editar.png" />
-    <Resource Include="Imagenes\guardar.png" />
-    <Resource Include="Imagenes\regresar.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Imagenes\nuevo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Imagenes\cam.png" />
+    <Resource Include="Imagen\Empelado.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

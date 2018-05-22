@@ -2,8 +2,10 @@
 using LaPapeleriaDaMore.COMMON.Entidades;
 using LaPapeleriaDaMore.COMMON.Interfaces;
 using LaPapeleriaDaMore.DAL;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,12 +38,18 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
         IMAnejadorDeCliente mAnejadorDeCliente;
         IManejadorDeEmpleado manejadorDeEmpleado;
         IManejadorDeProducto manejadorDeProducto;
+        IManejadorDeSucursal ManejadorDeSucursal;
         public VentanaReguistros(Sucursal sucursal)
         {
 
             InitializeComponent();
 
+
             this.Sucursal = sucursal;
+            if (sucursal.Empleados == null)
+            {
+                sucursal.Empleados = new List<Empleado>();
+            }
             lblDeSucursalCliente.Content = string.Format("Sucursal {0}",sucursal.Nombre);
             lblDeSucursalEmpleado.Content = string.Format("Sucursal {0}", sucursal.Nombre);
             lblDeSucursalProducto.Content = string.Format("Sucursal {0}", sucursal.Nombre);
@@ -49,6 +57,7 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
             lblContrasenaDeEmpleado.Visibility = Visibility.Collapsed;
             tbxContrasenaDeEmpleado.Visibility = Visibility.Collapsed;
 
+            ManejadorDeSucursal = new ManejadorDeSucursal(new RepositorioDeSucursal());
             mAnejadorDeCliente = new ManejadorDeCliente(new RepositorioDeCliente());
             manejadorDeEmpleado = new ManejadorDeEmpleado(new RepositorioDeEmpleado());
             manejadorDeProducto = new ManejadorDeProducto(new RepositorioDeProducto());
@@ -111,13 +120,15 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
             tbxSueldoDeEmpleado.Clear();
             tbxTelefonoEmpleado.Clear();
             panelDeDatosEmpleado.IsEnabled = v;
+            panelDeDatosEmpleadoConFoto.IsEnabled = v;
             lstvEmpleados.IsEnabled = !v;
+            ImgFoto.Source = null;
         }
 
         private void ActualizarTablaDeEmpleado()
         {
             lstvEmpleados.ItemsSource = null;
-            lstvEmpleados.ItemsSource = manejadorDeEmpleado.Listar;
+            lstvEmpleados.ItemsSource = Sucursal.Empleados;
         }
 
         private void HabilitarBotonesParaClientes(bool habilitado)
@@ -359,6 +370,7 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                         tbxNombreDeEmpleado.Text = empleado.Nombre;
                         tbxSueldoDeEmpleado.Text = empleado.Sueldo.ToString();
                         tbxTelefonoEmpleado.Text = empleado.Telefono;
+                        ImgFoto.Source = ByteToImagen(empleado.Fotografia);
                     }
                     
                 }
@@ -370,6 +382,24 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
             else
             {
                 MensajeNoContienes("empleado", "editar", "Falta de datos");
+            }
+        }
+
+        private ImageSource ByteToImagen(byte[] imageData)
+        {
+            if (imageData == null)
+            {
+                return null;
+            }
+            else
+            {
+                BitmapImage bitimg = new BitmapImage();
+                MemoryStream las = new MemoryStream(imageData);
+                bitimg.BeginInit();
+                bitimg.StreamSource = las;
+                bitimg.EndInit();
+                ImageSource imgSrc = bitimg as ImageSource;
+                return imgSrc;
             }
         }
 
@@ -430,9 +460,12 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                                 Nombre = tbxNombreDeEmpleado.Text,
                                 Sueldo = float.Parse(tbxSueldoDeEmpleado.Text),
                                 Telefono = tbxTelefonoEmpleado.Text,
-                                sucursal = Sucursal
+                                Fotografia = ImageToByte(ImgFoto.Source)
                             };
-                            if (manejadorDeEmpleado.Agregar(empleado))
+
+                            manejadorDeEmpleado.Agregar(empleado);
+                            Sucursal.Empleados.Add(empleado);
+                            if (ManejadorDeSucursal.Modificar(Sucursal))
                             {
                                 MensajeDeOperacionCorrecta("empleado", "agrego", "agregado");
                                 ActualizarTablaDeEmpleado();
@@ -442,6 +475,8 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                             else
                             {
                                 MensajeDeOperacionIncorrecta("empleado", "agregar", "Error al agregar el empleado");
+                                throw new Exception("error");
+
                             }
 
                         }
@@ -456,14 +491,20 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                         if (!string.IsNullOrWhiteSpace(tbxContrasenaDeEmpleado.Text) && !string.IsNullOrWhiteSpace(tbxEmailDeEmpleado.Text) && !string.IsNullOrWhiteSpace(tbxNombreDeEmpleado.Text) && !string.IsNullOrWhiteSpace(tbxSueldoDeEmpleado.Text) && !string.IsNullOrWhiteSpace(tbxTelefonoEmpleado.Text))
                         {
                             Empleado empleado = lstvEmpleados.SelectedItem as Empleado;
-                            empleado.Contrasena = tbxContrasenaDeEmpleado.Text;
-                            empleado.Email = tbxEmailDeEmpleado.Text;
-                            empleado.Nombre = tbxNombreDeEmpleado.Text;
-                            empleado.Sueldo = float.Parse(tbxSueldoDeEmpleado.Text);
-                            empleado.Telefono = tbxTelefonoEmpleado.Text;
-                            empleado.sucursal = Sucursal;
-                            if (manejadorDeEmpleado.Modificar(empleado))
-                            {
+                            Sucursal.Empleados.Remove(empleado);
+
+                            Empleado empleado1 = new Empleado();
+                            empleado1.Contrasena = tbxContrasenaDeEmpleado.Text;
+                            empleado1.Email = tbxEmailDeEmpleado.Text;
+                            empleado1.Nombre = tbxNombreDeEmpleado.Text;
+                            empleado1.Sueldo = float.Parse(tbxSueldoDeEmpleado.Text);
+                            empleado1.Telefono = tbxTelefonoEmpleado.Text;
+                            empleado1.Fotografia = ImageToByte(ImgFoto.Source);
+
+                            manejadorDeEmpleado.Agregar(empleado);
+                            Sucursal.Empleados.Add(empleado1);
+                            if (ManejadorDeSucursal.Modificar(Sucursal))
+                            { 
                                 MensajeDeOperacionCorrecta("gerente", "modifico", "modificado");
                                 ActualizarTablaDeEmpleado();
                                 HabilitarBotonesParaEmpleados(false);
@@ -485,14 +526,21 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                         if (!string.IsNullOrWhiteSpace(tbxCargoDeEmpleado.Text) && !string.IsNullOrWhiteSpace(tbxEmailDeEmpleado.Text) && !string.IsNullOrWhiteSpace(tbxNombreDeEmpleado.Text) && !string.IsNullOrWhiteSpace(tbxSueldoDeEmpleado.Text) && !string.IsNullOrWhiteSpace(tbxTelefonoEmpleado.Text))
                         {
                             Empleado empleado = lstvEmpleados.SelectedItem as Empleado;
+                            Sucursal.Empleados.Remove(empleado);
 
-                            empleado.Cargo = tbxCargoDeEmpleado.Text;
-                            empleado.Email = tbxEmailDeEmpleado.Text;
-                            empleado.Nombre = tbxNombreDeEmpleado.Text;
-                            empleado.Sueldo = float.Parse(tbxSueldoDeEmpleado.Text);
-                            empleado.Telefono = tbxTelefonoEmpleado.Text;
-                            empleado.sucursal = Sucursal;
-                            if (manejadorDeEmpleado.Modificar(empleado))
+                            Empleado empleado1 = new Empleado()
+                            {
+                                Cargo = tbxCargoDeEmpleado.Text,
+                                Contrasena = null,
+                                Email = tbxEmailDeEmpleado.Text,
+                                Nombre = tbxNombreDeEmpleado.Text,
+                                Sueldo = float.Parse(tbxSueldoDeEmpleado.Text),
+                                Telefono = tbxTelefonoEmpleado.Text,
+                                Fotografia = ImageToByte(ImgFoto.Source)
+                            };
+                            manejadorDeEmpleado.Agregar(empleado);
+                            Sucursal.Empleados.Add(empleado1);
+                            if (ManejadorDeSucursal.Modificar(Sucursal))
                             {
                                 MensajeDeOperacionCorrecta("empleado", "modifico", "modificado");
                                 ActualizarTablaDeEmpleado();
@@ -519,6 +567,22 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
             {
 
                 MensajeDeError(ex);
+            }
+        }
+
+        public byte[] ImageToByte(ImageSource image)
+        {
+            if (image != null)
+            {
+                MemoryStream memoryStream = new MemoryStream();
+                JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(image as BitmapSource));
+                encoder.Save(memoryStream);
+                return memoryStream.ToArray();
+            }
+            else
+            {
+                return null;
             }
         }
 
@@ -665,6 +729,16 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                 MainWindow pagina = new MainWindow();
                 pagina.Show();
                 this.Close();
+            }
+        }
+
+        private void btnFoto_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Selecciona la fotografia";
+            dialog.Filter = "Formato de imagen|*.jpg; *.png";
+            if (dialog.ShowDialog().Value){
+                ImgFoto.Source = new BitmapImage(new Uri(dialog.FileName));
             }
         }
     }

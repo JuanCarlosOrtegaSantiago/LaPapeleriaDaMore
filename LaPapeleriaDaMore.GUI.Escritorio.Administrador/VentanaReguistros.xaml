@@ -49,7 +49,7 @@
                     </WrapPanel>
                     <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
                         <Label VerticalAlignment="Center">*Telefono:</Label>
-                        <TextBox x:Name="tbxTelefonoCliente" VerticalAlignment="Center" Width="150"></TextBox>
+                        <TextBox x:Name="tbxTelefonoCliente" VerticalAlignment="Center" Width="150" MaxLength="10"></TextBox>
                     </WrapPanel>
                     <WrapPanel Orientation="Horizontal" Margin="0,5" HorizontalAlignment="Right">
                         <Label VerticalAlignment="Center">*RFC:</Label>
@@ -108,8 +108,8 @@
                         <DataTemplate>
                             <Grid Width="250">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"/>
@@ -117,7 +117,7 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock FontSize="12" HorizontalAlignment="Center" Text="{Binding Nombre}" Grid.Column="0" Grid.Row="0"></TextBlock>
                                 <TextBlock FontSize="12" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="0" Text="{Binding RFC}"></TextBlock>
-                                <Expander FontSize="12" Header="Mas" Grid.Column="0" Grid.Row="1">
+                                <Expander FontSize="12" HorizontalAlignment="Center" Header="Mas" Grid.Column="0" Grid.Row="1">
                                     <TextBlock FontSize="12" HorizontalAlignment="Center" Text="{Binding Email}" Grid.Column="1" Grid.Row="1"></TextBlock>
                                 </Expander>
                             </Grid>
@@ -155,14 +155,14 @@
                 <WrapPanel Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Label VerticalAlignment="Center"  FontWeight="Heavy" FontSize="15">EMPLEADOS</Label>
                 </WrapPanel>
-                <WrapPanel x:Name="panelDeDatosEmpleado" Orientation="Vertical" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <WrapPanel x:Name="panelDeDatosEmpleado" Orientation="Vertical" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center">
                     <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Label VerticalAlignment="Center">*Nombre:</Label>
                         <TextBox x:Name="tbxNombreDeEmpleado" VerticalAlignment="Center" Width="150"></TextBox>
                     </WrapPanel>
                     <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
                         <Label VerticalAlignment="Center">*Telefono:</Label>
-                        <TextBox x:Name="tbxTelefonoEmpleado" VerticalAlignment="Center" Width="150"></TextBox>
+                        <TextBox x:Name="tbxTelefonoEmpleado" VerticalAlignment="Center" Width="150" MaxLength="10"></TextBox>
                     </WrapPanel>
                     <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Label VerticalAlignment="Center">*Cargo:</Label>
@@ -183,6 +183,15 @@
                     <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
                         <Label VerticalAlignment="Center" FontWeight="DemiBold" Foreground="Red">* Campos Obligatrios *</Label>
                     </WrapPanel>
+                </WrapPanel>
+                <WrapPanel x:Name="panelDeDatosEmpleadoConFoto" Orientation="Vertical" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Image x:Name="ImgFoto" Height="100" Width="100"></Image>
+                    <Button x:Name="btnFoto" Click="btnFoto_Click">
+                        <WrapPanel>
+                            <Label>Cargar foto</Label>
+                            <Image Source="Imagenes/cam.png" Width="15"></Image>
+                        </WrapPanel>
+                    </Button>
                 </WrapPanel>
                 <WrapPanel Orientation="Vertical" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <WrapPanel Orientation="Vertical" Margin="5,0">
@@ -224,22 +233,25 @@
                         </WrapPanel>
                     </WrapPanel>
                 </WrapPanel>
-                <ListView x:Name="lstvEmpleados" HorizontalContentAlignment="Center" Grid.Row="2" Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="2">
+                <ListView x:Name="lstvEmpleados" HorizontalContentAlignment="Center" Grid.Row="2" Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="{x:Null}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Width="250">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"/>
                                     <RowDefinition Height="auto"/>
                                 </Grid.RowDefinitions>
                                 <TextBlock FontSize="12" HorizontalAlignment="Center" Text="{Binding Nombre}" Grid.Column="0" Grid.Row="0"></TextBlock>
-                                <TextBlock FontSize="12" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="0" Text="{Binding Cargo}"></TextBlock>
-                                <Expander FontSize="12" Header="Mas" Grid.Column="0" Grid.Row="1">
+                                <TextBlock FontSize="12" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="0" Text="{Binding Cargo}"></TextBlock>
+                                <Expander HorizontalAlignment="Center" FontSize="12" Header="Telefono" Grid.Column="0" Grid.Row="1">
                                     <TextBlock FontSize="12" HorizontalAlignment="Center" Text="{Binding Telefono}" Grid.Column="1" Grid.Row="1"></TextBlock>
+                                </Expander>
+                                <Expander HorizontalAlignment="Center" FontSize="12" Header="Foto" Grid.Column="1" Grid.Row="1">
+                                    <Image Source="{Binding Fotografia}" Height="80" Width="80"></Image>
                                 </Expander>
                             </Grid>
                         </DataTemplate>
@@ -340,13 +352,13 @@
                         </WrapPanel>
                     </WrapPanel>
                 </WrapPanel>
-                <ListView x:Name="lstProducto" HorizontalContentAlignment="Center" Grid.Row="2" Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="2">
+                <ListView x:Name="lstProducto" HorizontalContentAlignment="Center" Grid.Row="2" Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="{x:Null}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Width="250">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"/>
@@ -354,7 +366,7 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock FontSize="12" HorizontalAlignment="Center" Text="{Binding Nombre}" Grid.Column="0" Grid.Row="0"></TextBlock>
                                 <TextBlock FontSize="12" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="0" Text="{Binding Codigo}"></TextBlock>
-                                <Expander FontSize="12" Header="Mas" Grid.Column="0" Grid.Row="1">
+                                <Expander HorizontalAlignment="Center" FontSize="12" Header="Mas" Grid.Column="0" Grid.Row="1">
                                     <TextBlock FontSize="12" HorizontalAlignment="Center" Text="{Binding Cantidad}" Grid.Column="1" Grid.Row="1"></TextBlock>
                                 </Expander>
                             </Grid>

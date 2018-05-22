@@ -92,10 +92,10 @@
         <ListView x:Name="lstvSucursales" Grid.Row="3" Grid.RowSpan="2" Grid.Column="5" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="{x:Null}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="200">
+                    <Grid Width="350">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -103,8 +103,8 @@
                         </Grid.RowDefinitions>
                         <TextBlock FontSize="12" HorizontalAlignment="Center" Text="{Binding Nombre}" Grid.Column="0" Grid.Row="0"></TextBlock>
                         <TextBlock FontSize="12" HorizontalAlignment="Center" Text="{Binding Direccion}" Grid.Column="1" Grid.Row="0"></TextBlock>
-                        <Expander FontSize="12" Header="Gerente" Grid.Column="0" Grid.Row="1">
-                            <ListView x:Name="juankx" Width="100" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Grid.ColumnSpan="2" ItemsSource="{Binding Encargado}" Background="{x:Null}" BorderBrush="{x:Null}"></ListView>
+                        <Expander HorizontalAlignment="Center" FontSize="12" Header="Gerente" Grid.Column="0" Grid.Row="1">
+                            <TextBlock FontSize="12" HorizontalAlignment="Center" Text="{Binding Encargado}" Grid.Column="1" Grid.Row="0"></TextBlock>
                         </Expander>
                     </Grid>
                 </DataTemplate>

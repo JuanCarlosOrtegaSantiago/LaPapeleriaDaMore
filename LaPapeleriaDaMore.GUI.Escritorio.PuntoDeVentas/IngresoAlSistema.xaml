@@ -1,13 +1,13 @@
-﻿<Window x:Class="LaPapeleriaDaMore.GUI.Escritorio.Administrador.IngresoASucursales"
+﻿<Window x:Class="LaPapeleriaDaMore.GUI.Escritorio.PuntoDeVentas.IngresoAlSistema"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LaPapeleriaDaMore.GUI.Escritorio.Administrador"
+        xmlns:local="clr-namespace:LaPapeleriaDaMore.GUI.Escritorio.PuntoDeVentas"
         mc:Ignorable="d"
-        Height="400" Width="400" WindowStartupLocation="CenterScreen">
+        Height="450" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Background>
-        <ImageBrush ImageSource="Imagenes/fondo.png" Stretch="UniformToFill"/>
+        <ImageBrush ImageSource="Imagen/fondo.png" Stretch="UniformToFill"/>
     </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
@@ -29,29 +29,39 @@
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
         <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="5">
-            <Image Source="Imagenes/ico.png" Margin="10,0" ></Image>
+            <Image Source="Imagen/ico.png" Margin="10,0" ></Image>
+            <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0" >
+                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="UltraBlack" FontStyle="Italic">Ingresa tu usuario</Label>
+                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="UltraBlack" FontStyle="Italic">y contraseña</Label>
+            </WrapPanel>
         </WrapPanel>
         <WrapPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="3">
             <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5">
-                <Image Source="Imagenes/encargado.png" Height="25" Width="15"></Image>
-                <Label Height="25">Usuario</Label>
-                <TextBox x:Name="tbxUsuario" Width="130" Height="25" KeyUp="pswrContrasena_KeyUp"></TextBox>
+                <Image Source="Imagen/encargado.png" Height="25" Width="15"></Image>
+                <Label Height="25">encargado</Label>
+                <Label x:Name="txtblkUsuario" Width="130" Height="25"></Label>
             </WrapPanel>
             <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5">
-                <Image Source="Imagenes/key.png" Height="25" Width="15"></Image>
+                <Image Source="Imagen/key.png" Height="25" Width="15"></Image>
                 <Label Height="25">Contraseña</Label>
                 <PasswordBox x:Name="pswrContrasena" HorizontalAlignment="Right" VerticalAlignment="Center" Width="130" Height="25" KeyUp="pswrContrasena_KeyUp"></PasswordBox>
             </WrapPanel>
+            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5">
+                <Image Source="Imagen/Empelado.gif" Height="25" Width="15"></Image>
+                <Label Height="25">Empleado</Label>
+                <ComboBox x:Name="combxEmpleados" HorizontalAlignment="Right" VerticalAlignment="Center" Width="130" Height="25" KeyUp="pswrContrasena_KeyUp"></ComboBox>
+            </WrapPanel>
             <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5">
-                <Label x:Name="lblErrorFaltaDeDatos" HorizontalAlignment="Center"  FontSize="10" FontWeight="Black" Foreground="Red">Faltan campos por llenar</Label>
+                <Label x:Name="lblErrorFaltaContrasena" HorizontalAlignment="Center"  FontSize="10" FontWeight="Black" Foreground="Red">No has ingresado tu contraseña</Label>
                 <Label x:Name="lblErrorContrasenaIncorrecta" HorizontalAlignment="Center"  FontSize="10" FontWeight="Black" Foreground="Red"></Label>
+                <Label x:Name="lblErrorFaltaDatos" HorizontalAlignment="Center"  FontSize="10" FontWeight="Black" Foreground="Red">Faltan datos</Label>
             </WrapPanel>
         </WrapPanel>
         <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="3">
             <Button Width="80" x:Name="btnAceptar" Click="btnAceptar_Click">
                 <WrapPanel>
                     <Label>Aceptar</Label>
-                    <Image Source="Imagenes/accept.png" Height="25" Width="20"></Image>
+                    <Image Source="Imagen/accept.png" Height="25" Width="20"></Image>
                 </WrapPanel>
             </Button>
         </WrapPanel>

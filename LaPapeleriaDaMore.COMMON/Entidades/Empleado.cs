@@ -9,5 +9,6 @@ namespace LaPapeleriaDaMore.COMMON.Entidades
         public string Cargo { get; set; }
         public float Sueldo { get; set; }
         public string Contrasena { get; set; }
+        public byte[] Fotografia{ get; set; }
     }
 }
