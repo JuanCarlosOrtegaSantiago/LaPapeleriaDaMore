@@ -66,6 +66,9 @@
     <Compile Include="Venta.xaml.cs">
       <DependentUpon>Venta.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VentanaRegistros.xaml.cs">
+      <DependentUpon>VentanaRegistros.xaml</DependentUpon>
+    </Compile>
     <Page Include="IngresoAlSistema.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -87,6 +90,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Venta.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaRegistros.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -183,6 +190,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Imagen\Empelado.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\Registro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\accion.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

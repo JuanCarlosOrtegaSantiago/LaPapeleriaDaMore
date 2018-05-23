@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LaPapeleriaDaMore.COMMON.Interfaces
 {
-    public interface IManejadorDeVenta:IManejadorGenerico<Venta>
+    public interface IManejadorDeVenta:IManejadorGenerico<Ventas>
     {
     }
 }

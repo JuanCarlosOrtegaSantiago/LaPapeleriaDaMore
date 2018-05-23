@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LaPapeleriaDaMore.GUI.Escritorio.PuntoDeVentas"
         mc:Ignorable="d"
-        Title="Venta" Height="550" Width="850">
+        Title="Venta" Height="550" Width="850" WindowStartupLocation="CenterScreen">
     <Window.Background>
         <ImageBrush ImageSource="Imagen/fondo.png" Stretch="UniformToFill"/>
     </Window.Background>
@@ -27,6 +27,10 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
+        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
+            <Label FontSize="15" FontWeight="Black" Margin="5,0">Total:</Label>
+            <Label x:Name="lblTotal" FontSize="15" FontWeight="Black" Margin="5,0"></Label>
+        </WrapPanel>
         <WrapPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image Source="Imagen/ico.png" Height="80" Width="100" Margin="20,10" ></Image>
             <WrapPanel Orientation="Vertical" VerticalAlignment="Center">
@@ -36,14 +40,14 @@
         </WrapPanel>
         <WrapPanel Orientation="Vertical" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label VerticalAlignment="Center"  FontWeight="Heavy" FontSize="15">VENTA</Label>
-            <Button Click="Button_Click">
+            <Button x:Name="btnRegresar" Click="Button_Click">
                 <WrapPanel>
                     <Label>Regresar</Label>
                     <Image Source="Imagen\regresar.png" Width="20"></Image>
                 </WrapPanel>
             </Button>
         </WrapPanel>
-        <WrapPanel x:Name="panelDeDatosCliente" Orientation="Vertical" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <WrapPanel x:Name="panelDeDatosVenta" Orientation="Vertical" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <WrapPanel Orientation="Vertical" Margin="0,5" HorizontalAlignment="Center">
                 <WrapPanel HorizontalAlignment="Center">
                     <Label VerticalAlignment="Center">*Producto:</Label>
@@ -51,14 +55,14 @@
                 </WrapPanel>
                 <WrapPanel HorizontalAlignment="Center">
                     <Label VerticalAlignment="Center">Cantidad:</Label>
-                    <TextBox x:Name="tbxTelefonoCliente" VerticalAlignment="Center" Width="50" MaxLength="3"></TextBox>
+                    <TextBox x:Name="tbxCantidad" VerticalAlignment="Center" Width="50" MaxLength="3"></TextBox>
                     
-                    <Button Width="30" x:Name="btnAdd">
+                    <Button Width="30" x:Name="btnAdd" Click="btnAdd_Click">
                         <WrapPanel>
                             <Image Source="Imagen\add.png"></Image>
                         </WrapPanel>
                     </Button>
-                    <Button Width="30" x:Name="btnDelete">
+                    <Button Width="30" x:Name="btnDelete" Click="btnDelete_Click">
                         <WrapPanel>
                             <Image Source="Imagen\delete.png"></Image>
                         </WrapPanel>
@@ -75,13 +79,13 @@
                 <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Label VerticalAlignment="Center">*Cliente:</Label>
                     <WrapPanel HorizontalAlignment="Center">
-                        <Button x:Name="btnClienteNuevo">Cliente Nuevo</Button>
-                        <Button x:Name="btnClienteFrecuente">Cliente Frecuente</Button>
+                        <Button x:Name="btnClienteNuevo" Click="btnClienteNuevo_Click">Cliente Nuevo</Button>
+                        <Button x:Name="btnClienteFrecuente" Click="btnClienteFrecuente_Click">Cliente Frecuente</Button>
                     </WrapPanel>
                 </WrapPanel>
                 <WrapPanel x:Name="cmbDeClienteFrecuente" HorizontalAlignment="Center">
                     <Label VerticalAlignment="Center">*Cliente:</Label>
-                    <ComboBox x:Name="btnCliente" Width="150"></ComboBox>
+                    <ComboBox x:Name="cmbxDeClienteFrecuente" Width="150"></ComboBox>
                 </WrapPanel>
                 <WrapPanel x:Name="cmbClienteNuevo" HorizontalAlignment="Center">
                     <WrapPanel HorizontalAlignment="Center">
@@ -108,60 +112,47 @@
         <WrapPanel Orientation="Vertical" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <WrapPanel Orientation="Vertical" Margin="5,0">
                 <WrapPanel>
-                    <Button x:Name="btnNuevoCliente" Margin="10,10" Width="80" Height="30" >
+                    <Button x:Name="btnNuevaVenta" Margin="10,10" Width="80" Height="30" Click="btnNuevaVenta_Click">
                         <WrapPanel>
-                            <Label>Nuevo</Label>
+                            <Label>Nueva</Label>
                             <Image Source="Imagen/nuevo.png" Width="15"></Image>
                         </WrapPanel>
                     </Button>
-                    <Button x:Name="btnGuardarCliente" Margin="10,10" Width="80" Height="30" >
+                    <Button x:Name="btnGuardarVender" Margin="10,10" Width="80" Height="30" Click="btnGuardarVender_Click">
                         <WrapPanel>
-                            <Label>Guardar</Label>
+                            <Label>Vender</Label>
                             <Image Source="Imagen/guardar.png" Width="15"></Image>
                         </WrapPanel>
                     </Button>
-                    <Button x:Name="btnCancelarCliente" Margin="10,10" Width="81"  Height="30" >
+                    <Button x:Name="btnCancelarVenta" Margin="10,10" Width="81"  Height="30" Click="btnCancelarVenta_Click">
                         <WrapPanel>
                             <Label>Cancelar</Label>
                             <Image Source="Imagen/cancel.png" Width="15"></Image>
                         </WrapPanel>
                     </Button>
                 </WrapPanel>
-
-                <WrapPanel HorizontalAlignment="Center">
-
-                    <Button x:Name="btnEditarCliente" Margin="10,10" Width="80" Height="30" >
-                        <WrapPanel>
-                            <Label>Editar</Label>
-                            <Image Source="Imagen/editar.png" Width="15"></Image>
-                        </WrapPanel>
-                    </Button>
-                    <Button x:Name="btnEliminarCliente" Margin="10,10" Width="80" Height="30" >
-                        <WrapPanel>
-                            <Label>Eliminar</Label>
-                            <Image Source="Imagen/delete.png" Width="15"></Image>
-                        </WrapPanel>
-                    </Button>
-                </WrapPanel>
             </WrapPanel>
         </WrapPanel>
-        <ListView x:Name="lstvClientes" HorizontalContentAlignment="Center" Grid.Row="2" Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="{x:Null}">
+        <ListView x:Name="lstvMaterialesEnLista" HorizontalContentAlignment="Center" Grid.Row="2" Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="{x:Null}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="250">
+                    <Grid Width="350">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock FontSize="12" HorizontalAlignment="Center" Text="{Binding Nombre}" Grid.Column="0" Grid.Row="0"></TextBlock>
-                        <TextBlock FontSize="12" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="0" Text="{Binding RFC}"></TextBlock>
-                        <Expander FontSize="12" HorizontalAlignment="Center" Header="Mas" Grid.Column="0" Grid.Row="1">
-                            <TextBlock FontSize="12" HorizontalAlignment="Center" Text="{Binding Email}" Grid.Column="1" Grid.Row="1"></TextBlock>
-                        </Expander>
+                        <Label HorizontalContentAlignment="Left" VerticalAlignment="Center" FontSize="12" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0">Nombre:</Label>
+                        <TextBlock  FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{Binding Nombre}" Grid.Column="0" Grid.Row="0"></TextBlock>
+
+                        <Label HorizontalContentAlignment="Left" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0">Cantidad:</Label>
+                        <TextBlock FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Text="{Binding Cantidad}"></TextBlock>
+
+                        <Label HorizontalContentAlignment="Left" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0">Presio:</Label>
+                        <TextBlock FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Text="{Binding PresioVenta}"></TextBlock>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

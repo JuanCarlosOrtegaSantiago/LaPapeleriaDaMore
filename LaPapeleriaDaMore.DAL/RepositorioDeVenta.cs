@@ -8,31 +8,31 @@ using System.Text;
 
 namespace LaPapeleriaDaMore.DAL
 {
-    public class RepositorioDeVenta : IRepositorio<Venta>
+    public class RepositorioDeVenta : IRepositorio<Ventas>
     {
         private string DBName = @"C:\Bd\LaPapeleriaDaMore.DB";
         private string TableName = "Ventas";
-        public List<Venta> Leer
+        public List<Ventas> Leer
         {
             get
             {
-                List<Venta> datos = new List<Venta>();
+                List<Ventas> datos = new List<Ventas>();
                 using (var db = new LiteDatabase(DBName))
                 {
-                    datos = db.GetCollection<Venta>(TableName).FindAll().ToList();
+                    datos = db.GetCollection<Ventas>(TableName).FindAll().ToList();
                 }
                 return datos;
             }
         }
 
-        public bool Crear(Venta entidad)
+        public bool Crear(Ventas entidad)
         {
             try
             {
                 entidad.Id = Guid.NewGuid().ToString();
                 using (var db = new LiteDatabase(DBName))
                 {
-                    var colection = db.GetCollection<Venta>(TableName);
+                    var colection = db.GetCollection<Ventas>(TableName);
                     colection.Insert(entidad);
                 }
                 return true;
@@ -44,13 +44,13 @@ namespace LaPapeleriaDaMore.DAL
             }
         }
 
-        public bool Editar(Venta entidad)
+        public bool Editar(Ventas entidad)
         {
             try
             {
                 using (var db = new LiteDatabase(DBName))
                 {
-                    var colection = db.GetCollection<Venta>(TableName);
+                    var colection = db.GetCollection<Ventas>(TableName);
                     colection.Update(entidad);
                 }
                 return true;
@@ -69,7 +69,7 @@ namespace LaPapeleriaDaMore.DAL
                 int r;
                 using (var db = new LiteDatabase(DBName))
                 {
-                    var colection = db.GetCollection<Venta>(TableName);
+                    var colection = db.GetCollection<Ventas>(TableName);
                     r = colection.Delete(e => e.Id == id);
                 }
                 return r > 0;

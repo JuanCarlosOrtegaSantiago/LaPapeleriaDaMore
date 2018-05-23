@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LaPapeleriaDaMore.GUI.Escritorio.PuntoDeVentas"
         mc:Ignorable="d"
-        Title="Bienvenido" Height="440" Width="400">
+        Title="Bienvenido" Height="440" Width="400" WindowStartupLocation="CenterScreen">
     <Window.Background>
         <ImageBrush ImageSource="Imagen/fondo.png" Stretch="UniformToFill"/>
     </Window.Background>

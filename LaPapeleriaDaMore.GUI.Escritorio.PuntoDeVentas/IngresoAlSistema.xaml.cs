@@ -56,14 +56,22 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.PuntoDeVentas
             lblErrorContrasenaIncorrecta.Visibility = Visibility.Collapsed;
             lblErrorFaltaContrasena.Visibility = Visibility.Collapsed;
 
-            if (!string.IsNullOrWhiteSpace(pswrContrasena.Password) && combxEmpleados.SelectedItem != null) 
+            if (!string.IsNullOrWhiteSpace(pswrContrasena.Password) && combxEmpleados.SelectedItem != null && cmbxDeVentana.SelectedItem != null) 
             {
-                if (empleado.Contrasena == pswrContrasena.Password)
+                if (empleado.Contrasena == pswrContrasena.Password && cmbxDeVentana.SelectedItem==itemVenta)
                 {
                     Empleado empleado1 = combxEmpleados.SelectedItem as Empleado;
                     lblErrorContrasenaIncorrecta.Visibility = Visibility.Collapsed;
                     lblErrorFaltaContrasena.Visibility = Visibility.Collapsed;
                     PuntoDeVentas pagina = new PuntoDeVentas(sucursal,empleado1);
+                    pagina.Show();
+                    this.Close();
+                }
+                else if(empleado.Contrasena == pswrContrasena.Password && cmbxDeVentana.SelectedItem == itemRegistros)
+                {
+                    lblErrorContrasenaIncorrecta.Visibility = Visibility.Collapsed;
+                    lblErrorFaltaContrasena.Visibility = Visibility.Collapsed;
+                    VentanaRegistros pagina = new VentanaRegistros(sucursal,empleado);
                     pagina.Show();
                     this.Close();
                 }

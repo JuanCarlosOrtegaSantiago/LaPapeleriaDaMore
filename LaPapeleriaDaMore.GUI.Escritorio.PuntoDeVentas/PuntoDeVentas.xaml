@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LaPapeleriaDaMore.GUI.Escritorio.PuntoDeVentas"
         mc:Ignorable="d"
-        Title="PuntoDeVentas" Height="350" Width="350">
+        Title="PuntoDeVentas" Height="350" Width="350" WindowStartupLocation="CenterScreen">
     <Window.Background>
         <ImageBrush ImageSource="Imagen/fondo.png" Stretch="UniformToFill"/>
     </Window.Background>
@@ -29,7 +29,7 @@
         </Grid.ColumnDefinitions>
         <WrapPanel Orientation="Vertical" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center" >
             <Label x:Name="lblEmpleado" FontSize="20" FontStyle="Oblique" FontWeight="Black" VerticalAlignment="Center"></Label>
-            <Image x:Name="ImgFoto" Height="100" Width="100"></Image>
+            <Image x:Name="ImgFoto" Height="120" Width="130"></Image>
         </WrapPanel> 
         <WrapPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="3">
             <Button Width="150" Height="40" x:Name="btnNuevaVenta" Click="btnNuevaVenta_Click">

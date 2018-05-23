@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LaPapeleriaDaMore.GUI.Escritorio.PuntoDeVentas"
         mc:Ignorable="d"
-        Height="450" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Height="550" Width="450" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Background>
         <ImageBrush ImageSource="Imagen/fondo.png" Stretch="UniformToFill"/>
     </Window.Background>
@@ -29,13 +29,13 @@
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
         <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="5">
-            <Image Source="Imagen/ico.png" Margin="10,0" ></Image>
+            <Image Source="Imagen/ico.png" Width="120" Margin="10,0" ></Image>
             <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0" >
                 <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="UltraBlack" FontStyle="Italic">Ingresa tu usuario</Label>
                 <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="UltraBlack" FontStyle="Italic">y contraseña</Label>
             </WrapPanel>
         </WrapPanel>
-        <WrapPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="3">
+        <WrapPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="5">
             <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5">
                 <Image Source="Imagen/encargado.png" Height="25" Width="15"></Image>
                 <Label Height="25">encargado</Label>
@@ -50,6 +50,14 @@
                 <Image Source="Imagen/Empelado.gif" Height="25" Width="15"></Image>
                 <Label Height="25">Empleado</Label>
                 <ComboBox x:Name="combxEmpleados" HorizontalAlignment="Right" VerticalAlignment="Center" Width="130" Height="25" KeyUp="pswrContrasena_KeyUp"></ComboBox>
+            </WrapPanel>
+            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5">
+                <Image Source="Imagen/accion.png" Height="25" Width="15"></Image>
+                <Label Height="25">Accion</Label>
+                <ComboBox x:Name="cmbxDeVentana" HorizontalAlignment="Right" VerticalAlignment="Center" Width="130" Height="25" KeyUp="pswrContrasena_KeyUp">
+                    <ComboBoxItem x:Name="itemVenta" HorizontalAlignment="Center">Venta</ComboBoxItem>
+                    <ComboBoxItem x:Name="itemRegistros" HorizontalAlignment="Center">Registros</ComboBoxItem>
+                </ComboBox>
             </WrapPanel>
             <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5">
                 <Label x:Name="lblErrorFaltaContrasena" HorizontalAlignment="Center"  FontSize="10" FontWeight="Black" Foreground="Red">No has ingresado tu contraseña</Label>

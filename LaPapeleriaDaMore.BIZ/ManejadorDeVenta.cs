@@ -9,19 +9,19 @@ namespace LaPapeleriaDaMore.BIZ
 {
     public class ManejadorDeVenta : IManejadorDeVenta
     {
-        IRepositorio<Venta> repositorio;
-        public ManejadorDeVenta(IRepositorio<Venta> repositorio)
+        IRepositorio<Ventas> repositorio;
+        public ManejadorDeVenta(IRepositorio<Ventas> repositorio)
         {
             this.repositorio = repositorio;
         }
-        public List<Venta> Listar => repositorio.Leer;
+        public List<Ventas> Listar => repositorio.Leer;
 
-        public bool Agregar(Venta entidad)
+        public bool Agregar(Ventas entidad)
         {
             return repositorio.Crear(entidad);
         }
 
-        public Venta BuscarPorId(string id)
+        public Ventas BuscarPorId(string id)
         {
             return Listar.Where(e => e.Id == id).SingleOrDefault();
         }
@@ -31,7 +31,7 @@ namespace LaPapeleriaDaMore.BIZ
             return repositorio.Eliminar(id);
         }
 
-        public bool Modificar(Venta entidad)
+        public bool Modificar(Ventas entidad)
         {
             return repositorio.Editar(entidad);
         }
