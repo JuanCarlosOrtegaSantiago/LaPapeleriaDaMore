@@ -29,8 +29,8 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.PuntoDeVentas
         public MainWindow()
         {
             InitializeComponent();
-            manejadorDeSucursal = new ManejadorDeSucursal(new RepositorioDeSucursal());
-            manejadorDeEmpleado = new ManejadorDeEmpleado(new RepositorioDeEmpleado());
+            manejadorDeSucursal = new ManejadorDeSucursal(new RepositorioGenerico<Sucursal>());
+            manejadorDeEmpleado = new ManejadorDeEmpleado(new RepositorioGenerico<Empleado>());
 
 
             lblError.Visibility = Visibility.Collapsed;

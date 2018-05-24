@@ -57,10 +57,10 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
             lblContrasenaDeEmpleado.Visibility = Visibility.Collapsed;
             tbxContrasenaDeEmpleado.Visibility = Visibility.Collapsed;
 
-            ManejadorDeSucursal = new ManejadorDeSucursal(new RepositorioDeSucursal());
-            mAnejadorDeCliente = new ManejadorDeCliente(new RepositorioDeCliente());
-            manejadorDeEmpleado = new ManejadorDeEmpleado(new RepositorioDeEmpleado());
-            manejadorDeProducto = new ManejadorDeProducto(new RepositorioDeProducto());
+            ManejadorDeSucursal = new ManejadorDeSucursal(new RepositorioGenerico<Sucursal>());
+            mAnejadorDeCliente = new ManejadorDeCliente(new RepositorioGenerico<Cliente>());
+            manejadorDeEmpleado = new ManejadorDeEmpleado(new RepositorioGenerico<Empleado>());
+            manejadorDeProducto = new ManejadorDeProducto(new RepositorioGenerico<Producto>());
 
             ActualizarTeblaDeProducto();
             ActualizarTablaDeEmpleado();

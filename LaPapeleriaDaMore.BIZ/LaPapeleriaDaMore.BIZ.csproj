@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="LiteDB" Version="4.1.2" />
+    <PackageReference Include="MongoDB.Driver" Version="2.6.1" />
   </ItemGroup>
 
   <ItemGroup>

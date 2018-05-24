@@ -30,17 +30,17 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
         {
             InitializeComponent();
 
-            manejadorDeSucursal = new ManejadorDeSucursal(new RepositorioDeSucursal());
-            manejadorDeEmpleado = new ManejadorDeEmpleado(new RepositorioDeEmpleado());
+            manejadorDeSucursal = new ManejadorDeSucursal(new RepositorioGenerico<Sucursal>());
+            manejadorDeEmpleado = new ManejadorDeEmpleado(new RepositorioGenerico<Empleado>());
 
 
-            lblError.Visibility = Visibility.Collapsed;
 
             cmbxSucursal.ItemsSource = null;
             cmbxSucursal.ItemsSource = manejadorDeSucursal.Listar;
 
             cmbxEncargado.ItemsSource = null;
-            cmbxEncargado.ItemsSource = manejadorDeEmpleado.Listar.Where(e=>e.Cargo== "Gerente");
+            cmbxEncargado.ItemsSource = manejadorDeEmpleado.Listar.Where(e => e.Cargo == "Gerente");
+            lblError.Visibility = Visibility.Collapsed;
         }
 
         private void btnSalir_Click(object sender, RoutedEventArgs e)

@@ -1,4 +1,5 @@
 ﻿using LaPapeleriaDaMore.COMMON.Entidades;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +10,7 @@ namespace LaPapeleriaDaMore.COMMON.Interfaces
     {
         bool Crear(T entidad);
         bool Editar(T entidad);
-        bool Eliminar(string id);
+        bool Eliminar(ObjectId id);
         List<T> Leer { get; }
     }
 }

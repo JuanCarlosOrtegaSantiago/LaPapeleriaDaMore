@@ -46,9 +46,9 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.PuntoDeVentas
             this.empleado = empleado;
             this.sucursal = sucursal;
 
-            manejadorDeProducto = new ManejadorDeProducto(new RepositorioDeProducto());
-            mAnejadorDeCliente = new ManejadorDeCliente(new RepositorioDeCliente());
-            manejadorDeVenta = new ManejadorDeVenta(new RepositorioDeVenta());
+            manejadorDeProducto = new ManejadorDeProducto(new RepositorioGenerico<Producto>());
+            mAnejadorDeCliente = new ManejadorDeCliente(new RepositorioGenerico<Cliente>());
+            manejadorDeVenta = new ManejadorDeVenta(new RepositorioGenerico<Ventas>());
 
             lblDeEmpleado.Content = string.Format("{0}", empleado.Nombre);
             lblDeSucursalCliente.Content = string.Format("{0}", sucursal.Nombre);

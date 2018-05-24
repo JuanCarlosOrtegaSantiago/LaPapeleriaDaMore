@@ -32,7 +32,8 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.PuntoDeVentas
 
             this.empleado = empleado;
             this.sucursal = sucursal;
-            manejadorDeVenta = new ManejadorDeVenta(new RepositorioDeVenta());
+
+            manejadorDeVenta = new ManejadorDeVenta(new RepositorioGenerico<Ventas>());
             ActualizarTabla();
         }
 
@@ -52,16 +53,23 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.PuntoDeVentas
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
             Ventas ventas = lstvVentas.SelectedItem as Ventas;
-            if (manejadorDeVenta.Eliminar(ventas.Id))
+
+            if(ventas!= null)
             {
-                MessageBox.Show("Venta eliminada correctamente","Elemento eliminado",MessageBoxButton.OK,MessageBoxImage.Information,MessageBoxResult.None,MessageBoxOptions.ServiceNotification);
-                ActualizarTabla();
+                if (manejadorDeVenta.Eliminar(ventas.Id))
+                {
+                    MessageBox.Show("Venta eliminada correctamente", "Elemento eliminado", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.ServiceNotification);
+                    ActualizarTabla();
+                }
+                else
+                {
+                    MessageBox.Show("La Venta no se elimino", "Error al eliminar", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.ServiceNotification);
+                }
             }
             else
             {
-                MessageBox.Show("La Venta no se elimino", "Error al eliminar", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.ServiceNotification);
+                MessageBox.Show("No has seleccinado nada", "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.ServiceNotification);
             }
-
         }
     }
 }

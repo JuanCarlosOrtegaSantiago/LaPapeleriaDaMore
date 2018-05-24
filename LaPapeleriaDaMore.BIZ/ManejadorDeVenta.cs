@@ -1,5 +1,6 @@
 ﻿using LaPapeleriaDaMore.COMMON.Entidades;
 using LaPapeleriaDaMore.COMMON.Interfaces;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +22,12 @@ namespace LaPapeleriaDaMore.BIZ
             return repositorio.Crear(entidad);
         }
 
-        public Ventas BuscarPorId(string id)
+        public Ventas BuscarPorId(ObjectId id)
         {
             return Listar.Where(e => e.Id == id).SingleOrDefault();
         }
 
-        public bool Eliminar(string id)
+        public bool Eliminar(ObjectId id)
         {
             return repositorio.Eliminar(id);
         }

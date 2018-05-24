@@ -36,8 +36,8 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
         {
             InitializeComponent();
 
-            manejadorDeSucursal = new ManejadorDeSucursal(new RepositorioDeSucursal());
-            manejadorDeEmpleado = new ManejadorDeEmpleado(new RepositorioDeEmpleado());
+            manejadorDeSucursal = new ManejadorDeSucursal(new RepositorioGenerico<Sucursal>());
+            manejadorDeEmpleado = new ManejadorDeEmpleado(new RepositorioGenerico<Empleado>());
 
             
             PanelDeDatos.IsEnabled = false;
@@ -182,7 +182,7 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                             Contrasena = tbxContrasenaEncargado.Text,
                         };
                         manejadorDeEmpleado.Agregar(empleado);
-
+                         
                         Sucursal sucursal = new Sucursal()
                         {
                             Direccion = tbxDireccion.Text,
@@ -192,16 +192,6 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                         };
                         if (manejadorDeSucursal.Agregar(sucursal))
                         {
-                            //ComboBox combo = new ComboBox();
-                            //combo.SelectedItem = empleado;
-                            //Empleado empleado1 = combo.SelectedItem as Empleado;
-                            //empleado1.sucursal = sucursal;
-
-                            //if (manejadorDeEmpleado.Modificar(empleado1))
-                            //{
-                            //    MessageBox.Show("se modifico ah la sucursal ah"+empleado.sucursal.Nombre);
-                            //}
-
                             MessageBox.Show("Se agrego correctamente la sucursal ''" + sucursal.Nombre + "''", "Agregar", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.ServiceNotification);
                             ActualizarTablaSucursales();
                             PanelDeDatos.IsEnabled = false;
