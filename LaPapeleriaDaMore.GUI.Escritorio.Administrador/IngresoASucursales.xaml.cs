@@ -31,7 +31,8 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
-            ValidacionDeContrasena();
+            if (!string.IsNullOrWhiteSpace(pswrContrasena.Password) && !string.IsNullOrWhiteSpace(tbxUsuario.Text))
+                MessageBox.Show("Error no se ha podido reconocer los datos", "Error",MessageBoxButton.OK,MessageBoxImage.Hand,MessageBoxResult.None,MessageBoxOptions.ServiceNotification);
         }
 
         private void ValidacionDeContrasena()
@@ -41,7 +42,7 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
 
             if (!string.IsNullOrWhiteSpace(pswrContrasena.Password) && !string.IsNullOrWhiteSpace(tbxUsuario.Text)) 
             {
-                if (pswrContrasena.Password== "1234" && tbxUsuario.Text=="Juankx")
+                if (pswrContrasena.Password== "@-45*|7" && tbxUsuario.Text=="_-_")
                 {
                     lblErrorContrasenaIncorrecta.Visibility = Visibility.Collapsed;
                     lblErrorFaltaDeDatos.Visibility = Visibility.Collapsed;
@@ -73,11 +74,11 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
             }
         }
 
-        private void pswrContrasena_KeyUp(object sender, KeyEventArgs e)
+        private void Entrar(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            if (e.Key == Key.F4)
             {
-                ValidacionDeContrasena();
+                 ValidacionDeContrasena();
             }
         }
     }

@@ -49,10 +49,10 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
         private void LimpiarCampos()
         {
             tbxDireccion.Clear();
-            tbxEmailDeEncargado.Clear();
+            tbxTelefonoDeEncargado.Clear();
             tbxNombreEncargado.Clear();
             tbxNombreSucursal.Clear();
-            tbxTelefonoEncargado.Clear();
+            tbxSueldoEncargado.Clear();
             tbxContrasenaEncargado.Clear();
         }
 
@@ -108,9 +108,9 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                     tbxDireccion.Text = sucursal.Direccion;
                     tbxNombreSucursal.Text = sucursal.Nombre;
 
-                    tbxTelefonoEncargado.Text = sucursal.Encargado.Telefono;
+                    tbxSueldoEncargado.Text = sucursal.Encargado.Sueldo.ToString();
                     tbxNombreEncargado.Text = sucursal.Encargado.Nombre;
-                    tbxEmailDeEncargado.Text = sucursal.Encargado.Email;
+                    tbxTelefonoDeEncargado.Text = sucursal.Encargado.Telefono;
                     tbxContrasenaEncargado.Text = sucursal.Encargado.Contrasena;
 
                     BotonesHabilitados(true);
@@ -168,7 +168,7 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
         {
             try
             {
-                if (!string.IsNullOrWhiteSpace(tbxDireccion.Text) || !string.IsNullOrWhiteSpace(tbxEmailDeEncargado.Text) || !string.IsNullOrWhiteSpace(tbxNombreEncargado.Text) || !string.IsNullOrWhiteSpace(tbxNombreSucursal.Text) || !string.IsNullOrWhiteSpace(tbxTelefonoEncargado.Text))
+                if (!string.IsNullOrWhiteSpace(tbxDireccion.Text) || !string.IsNullOrWhiteSpace(tbxTelefonoDeEncargado.Text) || !string.IsNullOrWhiteSpace(tbxNombreEncargado.Text) || !string.IsNullOrWhiteSpace(tbxNombreSucursal.Text) || !string.IsNullOrWhiteSpace(tbxSueldoEncargado.Text))
                 {
                     if (accionDeSucursal == accion.nuevo)
                     {
@@ -176,9 +176,8 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
                         {
                             Nombre = tbxNombreEncargado.Text,
                             Cargo = "Gerente",
-                            Telefono = tbxTelefonoEncargado.Text,
-                            Sueldo = 823,
-                            Email = tbxEmailDeEncargado.Text,
+                            Sueldo = float.Parse(tbxSueldoEncargado.Text),
+                            Telefono = tbxTelefonoDeEncargado.Text,
                             Contrasena = tbxContrasenaEncargado.Text,
                         };
                         manejadorDeEmpleado.Agregar(empleado);
@@ -212,16 +211,16 @@ namespace LaPapeleriaDaMore.GUI.Escritorio.Administrador
 
                         sucursal.Direccion = tbxDireccion.Text;
                         sucursal.Nombre = tbxNombreSucursal.Text;
-                        empleado.Email = tbxEmailDeEncargado.Text;
+                        empleado.Telefono = tbxTelefonoDeEncargado.Text;
+                        empleado.Sueldo = float.Parse(tbxSueldoEncargado.Text)  ;
                         empleado.Nombre = tbxNombreEncargado.Text;
-                        empleado.Telefono = tbxTelefonoEncargado.Text;
                         empleado.Contrasena = tbxContrasenaEncargado.Text;
 
                         manejadorDeEmpleado.Modificar(empleado);
 
                         sucursal.Encargado.Nombre = empleado.Nombre;
+                        sucursal.Encargado.Sueldo = empleado.Sueldo;
                         sucursal.Encargado.Telefono = empleado.Telefono;
-                        sucursal.Encargado.Email = empleado.Email;
                         sucursal.Encargado.Contrasena = empleado.Contrasena;
 
                         

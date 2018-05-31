@@ -56,12 +56,12 @@
                 <TextBox x:Name="tbxNombreEncargado" HorizontalAlignment="Right" VerticalAlignment="Center" Width="150" Height="25"></TextBox>
             </WrapPanel>
             <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5">
-                <Label Height="25">*Email de encargado</Label>
-                <TextBox x:Name="tbxEmailDeEncargado" HorizontalAlignment="Right" VerticalAlignment="Center" Width="150" Height="25"></TextBox>
+                <Label Height="25">*Telefono de encargado</Label>
+                <TextBox x:Name="tbxTelefonoDeEncargado" HorizontalAlignment="Right" VerticalAlignment="Center" Width="150" Height="25"></TextBox>
             </WrapPanel>
             <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5">
-                <Label Height="25">*Telefono</Label>
-                <TextBox x:Name="tbxTelefonoEncargado" HorizontalAlignment="Right" VerticalAlignment="Center" Width="150" Height="25" MaxLength="10"></TextBox>
+                <Label Height="25">*Sueldo</Label>
+                <TextBox x:Name="tbxSueldoEncargado" HorizontalAlignment="Right" VerticalAlignment="Center" Width="150" Height="25" MaxLength="10"></TextBox>
             </WrapPanel>
             <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5">
                 <Label Height="25">*Contrasena Encargado</Label>

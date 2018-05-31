@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LaPapeleriaDaMore.GUI.Escritorio.Administrador"
         mc:Ignorable="d"
-        Height="400" Width="400" WindowStartupLocation="CenterScreen">
+        Height="400" Width="400" WindowStartupLocation="CenterScreen" KeyUp="Entrar">
     <Window.Background>
         <ImageBrush ImageSource="Imagenes/fondo.png" Stretch="UniformToFill"/>
     </Window.Background>
@@ -35,12 +35,12 @@
             <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5">
                 <Image Source="Imagenes/encargado.png" Height="25" Width="15"></Image>
                 <Label Height="25">Usuario</Label>
-                <TextBox x:Name="tbxUsuario" Width="130" Height="25" KeyUp="pswrContrasena_KeyUp"></TextBox>
+                <TextBox x:Name="tbxUsuario" Width="130" Height="25" ></TextBox>
             </WrapPanel>
             <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5">
                 <Image Source="Imagenes/key.png" Height="25" Width="15"></Image>
                 <Label Height="25">Contraseña</Label>
-                <PasswordBox x:Name="pswrContrasena" HorizontalAlignment="Right" VerticalAlignment="Center" Width="130" Height="25" KeyUp="pswrContrasena_KeyUp"></PasswordBox>
+                <PasswordBox x:Name="pswrContrasena" HorizontalAlignment="Right" VerticalAlignment="Center" Width="130" Height="25" ></PasswordBox>
             </WrapPanel>
             <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5">
                 <Label x:Name="lblErrorFaltaDeDatos" HorizontalAlignment="Center"  FontSize="10" FontWeight="Black" Foreground="Red">Faltan campos por llenar</Label>
